@@ -1,6 +1,6 @@
 # taller-unam
-Introducción a la síntesis sonora con SuperCollider.
-Hernani Villaseñor
+Introducción a la síntesis sonora con SuperCollider  
+Hernani Villaseñor  
 FaM UNAM, 14 de marzo 2023
 
 ## Software para el taller
@@ -12,6 +12,9 @@ Lenguaje de programación textual para síntesis. James McCartney (1996/2002)
 - Introducción a SuperCollider.  
 - Introducción a la síntesis con SuperCollider.
   - AM  
+  - Sustractiva  
+  - Modulación  
+  - Modelado  
 ## Formas de onda electrónicas
 Ruido, sinoidal, cuadrada, diente de sierra, triangular.  
 
@@ -28,22 +31,22 @@ Filtrar ruido en diferentes partes.
 Amplitud modulada y Frecuencia modulada
 
 ## Otro tipo de síntesis
-modelado físico, wave table, granular
+- modelado físico
+- wave table
+- granular
 
 ## Secuencia
-Secuencia con la librería de patrones de SperCollider
+Secuencia con la librería de patrones de SperCollider  
 
 ## Grabación de sonidos sintetizados
 Start Recording en Supercollider  
-writesf~ en PureData
 
 ## Edición y almacenamiento como archivo
-Audacity, Ardour o editor de sonido
+Audacity, Ardour o editor de sonido  
 
 ## Cómo continuar
 tutoriales en YouTube  
 sccode: https://sccode.org/  
-puredata patches: http://www.pdpatchrepo.info/
 
 ## Contacto
 hernani.vr@gmail.com  

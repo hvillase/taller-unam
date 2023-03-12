@@ -67,9 +67,9 @@ Ctrl + .
 // Apagar el servidor
 s.quit;
 
-//=============
-// 2 Síntesis
-//=============
+//==============================
+// 2 Introducción a la Síntesis
+//==============================
 
 // SynthDef
 
