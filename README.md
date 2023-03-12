@@ -1,22 +1,19 @@
 # taller-unam
-Introducción a la síntesis sonora con SuperCollider, Pure Data y Audacity
+Introducción a la síntesis sonora con SuperCollider
 
 ## Software para el taller
 [Supercollider](https://supercollider.github.io/)  
-[PureData](https://puredata.info/)  
 [Audacity](https://www.audacityteam.org/)   
 
 ## SuperCollider
 Lenguaje de programación textual para síntesis. James McCartney (1996/2002)  
-Hola mundo, caracteres, prender, formas de onda, play, scope.  
-
-## Pure Data
-Lenguaje de programación visual. Miller Puckette (1996)  
-hola mundo, conexión de cables, modo edición, menú poner, formas de onda, array.
+- Hola mundo  
+- caracteres
+- prender, formas de onda, play, scope.  
 
 ## Formas de onda electrónicas
-ruido, sine, cuadrada, diente de sierra, triangular.  
-phasor (pd).
+Ruido, sinoidal, cuadrada, diente de sierra, triangular.  
+Phasor (pd).  
 
 ## Envolvente
 Ataque, Decaimiento, Sostenimiento, Relajamiento (ADSR)
@@ -48,6 +45,6 @@ tutoriales en YouTube
 sccode: https://sccode.org/  
 puredata patches: http://www.pdpatchrepo.info/
 
-## contacto
+## Contacto
 hernani.vr@gmail.com  
 http://www.hernanivillasenor.com/
