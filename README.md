@@ -11,7 +11,7 @@ FaM UNAM, 14 de marzo 2023
 Lenguaje de programación textual para síntesis. James McCartney (1996/2002)  
 - Introducción a SuperCollider.  
 - Introducción a la síntesis con SuperCollider.
- - AM  
+  - AM  
 ## Formas de onda electrónicas
 Ruido, sinoidal, cuadrada, diente de sierra, triangular.  
 
