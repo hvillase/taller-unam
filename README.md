@@ -7,14 +7,13 @@ FaM UNAM, 14 de marzo 2023
 [Supercollider](https://supercollider.github.io/)  
 [Audacity](https://www.audacityteam.org/)   
 
-## SuperCollider
-Lenguaje de programación textual para síntesis. James McCartney (1996/2002)  
+## Contenido
 - Introducción a SuperCollider.  
-- Introducción a la síntesis con SuperCollider.
-  - AM  
-  - Sustractiva  
-  - Modulación  
-  - Modelado  
+- Introducción a la síntesis con SuperCollider.  
+
+## SuperCollider
+Lenguaje de programación textual para síntesis. James McCartney (1996/2002).
+
 ## Formas de onda electrónicas
 Ruido, sinoidal, cuadrada, diente de sierra, triangular.  
 
@@ -28,21 +27,21 @@ Suma de ondas sinoidales. Relación de frecuencias y amplitudes. Cuidar el volum
 Filtrar ruido en diferentes partes.
 
 ## Síntesis por modulación
-Amplitud modulada y Frecuencia modulada
+Amplitud Modulada (AM) y Frecuencia Modulada (FM).
 
 ## Otro tipo de síntesis
-- modelado físico
-- wave table
-- granular
+- Modelado Físico (Karplus-Strong)
+- Wave Table
+- Granular
 
 ## Secuencia
-Secuencia con la librería de patrones de SperCollider  
+Secuencia con la librería de patrones de SperCollider.  
 
 ## Grabación de sonidos sintetizados
-Start Recording en Supercollider  
+Start Recording en SuperCollider.  
 
 ## Edición y almacenamiento como archivo
-Audacity, Ardour o editor de sonido  
+Audacity, Ardour o editor de sonido.  
 
 ## Cómo continuar
 tutoriales en YouTube  
