@@ -44,8 +44,9 @@ Start Recording en SuperCollider.
 Audacity, Ardour o editor de sonido.  
 
 ## Cómo continuar
-tutoriales en YouTube  
+Tutoriales en YouTube  
 sccode: https://sccode.org/  
+[Curso de Música por Computadora CMM](http://cmm.cenart.gob.mx/tallerdeaudio/cursos/cursomusica_computadora/musica_computadora.html)  
 
 ## Contacto
 hernani.vr@gmail.com  
