@@ -35,13 +35,17 @@ Amplitud Modulada (AM) y Frecuencia Modulada (FM).
 - Granular
 
 ## Secuencia
-Secuencia con la librería de patrones de SperCollider.  
+Secuencia con la librería de patrones de SuperCollider.  
 
 ## Grabación de sonidos sintetizados
 Start Recording en SuperCollider.  
 
 ## Edición y almacenamiento como archivo
 Audacity, Ardour o editor de sonido.  
+
+## Compartir audio en Jitsi con QjackCTL
+[Collaborative Live Coding via Jitsi Meet for Linux Users](https://www.celesteh.com/blog/2020/04/03/collaborative-live-coding-via-jitsi-meet-for-linux-users/)  
+[Jitsi - Share screen with System Audio (on Linux) with Jack Audio and PulseAudio](https://youtu.be/eUl1HWTSmWY)  
 
 ## Cómo continuar
 Tutoriales en YouTube  

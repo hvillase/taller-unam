@@ -78,7 +78,10 @@ SynthDef
 // Envolvente
 Env.help;
 
-// 1 aditiva
+//++++++++++++++++++++++
+// 2.1 Síntesis Aditiva
+//++++++++++++++++++++++
+
 (
 SynthDef(\aditiva, {|f1=200, f2=300, f3=400, f4=500, a1=0.1, a2=0.1, a3=0.1, a4=0.1, amp=1, at=0.1,dec=0.1, sus=0.5, rel=1, gate=1, out=0|
 	var sin1, sin2, sin3, sin4, pan, env;
@@ -94,7 +97,10 @@ SynthDef(\aditiva, {|f1=200, f2=300, f3=400, f4=500, a1=0.1, a2=0.1, a3=0.1, a4=
 
 Synth(\aditiva, [\f1, 254, \f2, 378, \f3, 450, \f4, 567, \at, 0.5, \sus,3, \rel, 1]);
 
-// 2 sustractiva
+//++++++++++++++++++++++++++
+// 2.2 Síntesis Sustractiva
+//++++++++++++++++++++++++++
+
 (
 SynthDef(\sustractiva, {|amp=0.1, fc=500, rq=1, gate=1, at=0.1, rel=0.1, out=0|
 	var noise, pan, filtro, env;
@@ -104,11 +110,14 @@ SynthDef(\sustractiva, {|amp=0.1, fc=500, rq=1, gate=1, at=0.1, rel=0.1, out=0|
 	env=EnvGen.ar(Env([0, 1, 0],[at, rel]), gate, doneAction:2);
 	Out.ar(out, filtro * env)
 }).add
-)
+);
 
 Synth(\sustractiva, [\rel, 3, \fc, 2000, \rq, 0.02, \amp, 0.5]);
 
-// 3 síntesis por modulación am
+//+++++++++++++++++++++++++++++++++
+// 2.3 Síntesis por modulación am
+//+++++++++++++++++++++++++++++++++
+
 (
 SynthDef(\am, {|freq=400, modulador = 10, rel=1, amp=0.5, gate=1, out=0|
 	var sen, pan, env;
@@ -117,11 +126,14 @@ SynthDef(\am, {|freq=400, modulador = 10, rel=1, amp=0.5, gate=1, out=0|
 	env=EnvGen.kr(Env([0,1,0],[0.1, rel]), gate, doneAction:2);
 	Out.ar(out, pan * env)
 }).add
-)
+);
 
 Synth(\am, [\freq, 500, \modulador, 300, \rel, 1.5]);
 
-// 4 síntesis por modulación fm
+//+++++++++++++++++++++++++++++++++
+// 2.4 Síntesis por modulación fm
+//+++++++++++++++++++++++++++++++++
+
 (
 SynthDef(\fm, {|carrier = 250, modulador=2, index=10, amp=0.5, gate=1, out = 0|
 	var sen, pan, env;
@@ -130,15 +142,19 @@ SynthDef(\fm, {|carrier = 250, modulador=2, index=10, amp=0.5, gate=1, out = 0|
 	env=EnvGen.kr(Env([0, 1, 0],[0.1, 1]), gate, doneAction:2);
 	Out.ar(out, pan * env)
 }).add
-)
+);
 
-Synth(\fm, [\carrier, 830, \modulador, 20, \index, 10, \amp, 0.2]);
+Synth(\fm, [\carrier, 500, \modulador, 200, \index, 600, \amp, 0.2]);
 
-// 5 sintesis wave shape
-// crear un buffer para alojar una tabla de onda
-~bch = Buffer.alloc(s, 1024, 1); // cheby
-~bch.cheby(Array.series(8, 0.01, 0.03)); // creación de la tabla de amplitudes
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 2.5 Síntesis Modelado de Onda (wave shape o waveshaping)
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+// Crear un buffer para alojar una tabla de onda de amplitudes con cheby
+~bch = Buffer.alloc(s, 1024, 1);
+~bch.cheby(Array.series(8, 0.01, 0.03));
+
+// usar el UGen Shaper
 (
 SynthDef(\ws, {|freq = 300, aws = 0.5, pws = 0, atws = 0.1, rws = 0.1, ows = 0|
 	var sen, env;
@@ -151,41 +167,36 @@ SynthDef(\ws, {|freq = 300, aws = 0.5, pws = 0, atws = 0.1, rws = 0.1, ows = 0|
 
 Synth(\ws, [atws: 0.1, rws: 1]);
 
-// Síntesis Karplus-Strong (modelado físico de cuerda pulsada)
-// Secuencia con Demand
-{Pluck.ar(PinkNoise.ar(0.5),Impulse.kr(3),440.reciprocal,440.reciprocal,10,0.1)}.play;
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// 2.6 Síntesis Karplus-Strong (modelado físico de cuerda pulsada)
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 (
-{
-var arranqueEnv, atk = 0, dec = 0.001;
-var arranque, delayTiempo, delayDecay = 0.5;
-var notaMidi = 69; // A 440
-delayTiempo = notaMidi.midicps.reciprocal;
-//RandSeed.kr(Impulse.kr(1/delayDecay), 111);
-arranqueEnv = EnvGen.kr(Env.perc(atk, dec), gate:
-Impulse.kr(1/delayDecay));
-arranque = PinkNoise.ar(arranqueEnv);
-CombL.ar(arranque, delayTiempo, delayTiempo,
-delayDecay, add: arranque);
-}.play
+SynthDef(\pluck, {|nota=200, imp=3, amp=1|
+	var pk, pan;
+	pk = Pluck.ar(PinkNoise.ar(0.5),Impulse.kr(imp),nota.reciprocal,nota.reciprocal,10,0.1);
+	pan = Pan2.ar(pk, 0, amp);
+	Out.ar(0, pan);
+}).add
 );
 
-(
-SynthDef(\kp, {||
-	var
-}
-).add
-);
+~pk=Synth(\pluck);
+~pk.set(\nota, 200, \imp, 2);
+~pk.free;
 
-// sintesis granular
+//+++++++++++++++++++++++
+// 2.7 Síntesis granular
+//+++++++++++++++++++++++
+
 ~bg = Buffer.read(s, "/usr/local/share/SuperCollider/sounds/a11wlk01.wav");
 
 (
-SynthDef(\GrainBuf,{|sndbuf,envbuf ,gate=1|
+SynthDef(\GrainBuf,{|sndbuf, envbuf, pn = 0, amp=1,  gate=1|
 var sen, env, pan;
-sen=GrainBuf.ar(1, Impulse.ar(10),0.1,sndbuf,LFNoise1.kr.range(1,2),LFNoise2.kr.range(0,1),1,0,envbuf)*4;
-env=EnvGen.kr(Env.asr(1,1),gate,doneAction:2);
-Out.ar(0,sen*env)
+	sen=GrainBuf.ar(1, Impulse.ar(10),0.1,sndbuf,LFNoise1.kr.range(1,2),LFNoise2.kr.range(0,1),1,0,envbuf)*4;
+	pan=Pan2.ar(sen, pn, amp);
+	env=EnvGen.kr(Env.asr(1, 1),gate,doneAction:2);
+Out.ar(0, pan*env)
 }).add
 );
 
@@ -193,48 +204,45 @@ a=Synth(\GrainBuf);
 a.set(\gate, 0);
 
 // Tgrain
-
-// Buffer con dos segundos de duración en mono
-~bg2 = Buffer.alloc(s, s.sampleRate * 2, 1);
-
-// luego hacemos un buffer para grabar sonido
+// granulamos el sonido leído por el buffer con TGrains
+~bg2 = Buffer.read(s, "/usr/local/share/SuperCollider/sounds/a11wlk01.wav");
 
 (
-SynthDef(\grabar,{|sen=0|
-var entrada;
-entrada=SoundIn.ar(sen);
-RecordBuf.ar(entrada, ~bg2.bufnum);
-}).add
-);
-
-x = Synth(\grabar);
-x.free; // al declarar esta linea se queda un sonido en el buffer
-
-// reproducimoslo grabado
-(
-SynthDef(\reproducir,{|salida=0|
-var senal;
-senal=PlayBuf.ar(1, ~bg2.bufnum,1);
-Out.ar(salida,senal!2)
-}).add
-);
-
-y=Synth(\reproducir);
-
-// granulamos el buffer con TGrains, usamos BufDur para saber la duración del buffer
-
-(
-SynthDef(\Tgrains,{|salida=0, buffer=0|
-var senal;
-senal=TGrains.ar(2,Impulse.ar(26),~bg2.bufnum,1,MouseX.kr(0,BufDur.kr(~bg2.bufnum)),0.1,0,1,2);
-Out.ar(0,senal!2)
+SynthDef(\Tgrains, {|pan = 0, amp = 1,  out = 0|
+var senal, paneo;
+	senal=TGrains.ar(~bg2.numChannels, Impulse.ar(26),~bg2.bufnum,1,MouseX.kr(0, BufDur.kr(~bg2.bufnum)), 0.1, 0, 1, 2);
+	paneo = Pan2.ar(senal, pan, amp);
+Out.ar(out, paneo)
 }).add
 );
 
 w=Synth(\Tgrains);
 w.free;
 
-// Secuencia
+// Tgrains coin sampletexto
+
+SampleTexto.help;
+t=SampleTexto.new;
+t.init(path: "/sonotexto");
+t.stsel;
+t.stm(0).play;
+
+(
+~num=0;
+SynthDef(\TgrainsST, {|pan = 0, amp = 1,  out = 0|
+var senal, paneo;
+	senal=TGrains.ar(t.stm(~num).numChannels, Impulse.ar(20), t.stm(~num).bufnum,1,MouseX.kr(0, BufDur.kr(t.stm(~num).bufnum)), 0.1, 0, 1, 2);
+	paneo = Pan2.ar(senal, pan, amp);
+Out.ar(out, paneo)
+}).add
+);
+
+z=Synth(\TgrainsST);
+z.free;
+
+//===========================
+// 3 Secuencia con patrones
+//===========================
 
 (
 Pdef(\sintesis, Pbind(\instrument, \aditiva,
@@ -266,13 +274,25 @@ Pdef(\sintesis, Pbind(\instrument, \am,
 (
 Pdef(\sintesis, Pbind(\instrument, \fm,
 	\dur, Pseq([0.5, 1, 0.25, 0.5, 1], inf),
-	\carrier, Pseq([500, 200, 1000, 300, 200], inf),
-	\modulador, Pseq([20, 9, 50],inf),
+	\carrier, Pseq([500, 200, 1000, 300, 200, 500], inf),
+	\modulador, Pseq([200, 900, 500],inf),
+	\index, 600,
 	\amp, 0.1
 )).stop
 );
 
-// Grabación
+(
+Pdef(\sintesis, Pbind(\instrument, \ws,
+	\dur, 0.25,
+	\freq, Pseq([250, 300, 440, 170, 500, 170, 550].mirror, inf),
+	\rws, 0.5
+)).stop
+);
+
+//=============
+// 4 Grabación
+//=============
+
 // Presionar Start Recording en el cuadro de la esquina inferior derecha
 // Buscar la ruta de los sonidos
 Platform.recordingsDir;
